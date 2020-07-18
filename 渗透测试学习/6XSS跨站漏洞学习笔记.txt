@@ -1,0 +1,72 @@
+XSS+管理员cookie 进入后台 /找后台地址
+难点：（其他的漏洞都很好的被规避了，但是XSS却还有很多）
+	挖掘
+	闭合 
+	绕过
+
+XSS漏洞基础讲解：
+	cross-site script 缓冲区溢出攻击，javascript是新型shellcode
+	web应用程序对用户输入过滤不严谨而产生的，恶意脚本植入网页中，其他用户浏览这些网页
+	时，执行恶意代码，比如获取用户cookie，会话劫持，钓鱼欺骗等
+	分类
+	反射型：非持久型，参数型主要讲恶意脚本附加URL中
+		http://www.xx.com/search.php?key="><script>alert(“xss”)</script>"
+		一般使用将构造好的url发送给受害者，访问一次则执行一次，非持久化
+	Dom型
+	存储型：此类XSS不需要用户点击url就可以执行，因为该脚本已经上传至服务器，用户加载某一个页面时，就已经
+		执行了恶意脚本
+	火狐中常用的XSS调试插件：
+		hackbar Firebug,
+		Tamper Data :抓包改包（bp repeater功能）
+		,Live HTTP Headers ,Editor Cookie
+		
+XSS漏洞发掘与绕过：闭合是为了不让js在标签内部，否则无法执行
+	挖掘方法：
+		手工挖掘：
+··			1得到一个站点 http://www.xx.com/xss.php?id=1
+			2payload 添加到后面<script>alert(1)</script>
+			3数据交互的时候，如输入，上传，flash
+			实列：
+			<div value="123">---><div value="">123<script>alert(/xss/)</script>">
+			万能前缀：‘“></tr></td>
+
+				--->@@操作：http://www.xx.com/xss.php?id=1<script>alert(1)</script>看是否弹窗
+		工具：
+			AWVS
+			netsparke
+			appscan
+			burp
+			xsser
+			xsscrapy
+			brutessr
+			OWASP Xenotix  4800条payload（闭合代码）
+		//创建自己的XSS平台
+		获取cookie：xss.fbisb.com XSS平台-->注册登录-->默认模块+keepsession-->拿到获取管理员cookie的
+		payload-->XSSpayload持久到web服务器，当管理员登录后访问该页面时-->获取cookie到XSS平台-->cookie马-->
+		强制修改cookie-->访问登录后的页面（类似session失效询问）-->-->-->-->
+		存在XSS点：个人资料中可能存在
+
+				--->@@操作：注册登录-->默认模块+keepsession-->拿到获取管理员cookie的
+		payload-->XSSpayload持久到web服务器，当管理员登录后访问该页面时-->获取cookie到XSS平台-->cookie马-->
+		强制修改cookie-->访问登录后的页面（类似session失效询问）
+
+
+		http-only启用后，无法获取cookie之后：XSS钓鱼
+		1保存admin登录页面-->-->-->-->-->-->-->-->-->-->https://www.mrwu.red/biji/3047.html
+·		2如果有二级密码则记录键盘
+		3代码级防御，除非防止输入所有标签，不然都是白搭
+	
+XSS漏洞综合利用：
+
+CSRF漏洞详解：还不如反射型XSS
+	构造一个url，这个url是一条请求，点击后直接请求某个服务器了，可以构造一个url，以各种形式去欺骗用户点击该链接
+则执行这个请求
+	防止手段
+		1禁止get提交
+		2根据referer来判断请求上级
+	netspark
+	AWVS
+	appscan		
+	
+SSRF(Server-side Request Forgery 服务器端请求伪造 )：
+	电脑--->连接内网交换机端口转发其中一台服务器，于是可以访问其服务器所有的资源

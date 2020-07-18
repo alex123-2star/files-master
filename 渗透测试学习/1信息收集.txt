@@ -1,0 +1,204 @@
+信息收集（养成完整的渗透测试思维）
+
+	1通过域名获取ip（ping www.baidu.com / nslookup www.baidu.com ）
+	2获取子域名：子域名可能和域名在同一个站点上
+		edu.baidu.com 安全级别比较低（谷歌语法，layer软件，subDomainsBrute（节省资源））
+
+			--->@@操作0：目标站：www.wids.edu.cn   /http://113.57.227.3/jiaowu/Login.aspx
+			--->@@操作1：site:wids.edu.cn    / Layer工具枚举爆破/subDomainBruit 解压到py27中先dns install 再
+				subDomainsBrute.py wids.edu.cn
+			--->@@操作2：whois/站长工具/爱站网/微步在线
+	
+敏感目录：
+	收集方向：robots.txt：反爬虫文件
+		后台目录：
+			--->@@操作1:Rolan中御剑(两把剑)跑字典
+			--->@@操作2:Rolan OWASP dir功能
+		安装包
+		上传目录 ：服务包，可以代码审计
+		mysql 
+		管理接口
+		安装phpinfo
+		编辑器：
+		iis段文件
+	常用Tools
+			--->@@操作1字典爆破----》御剑(加载字典扫目录)，dirbuster(加载字典扫目录)，wwwscan
+			--->@@操作2蜘蛛爬行---->爬行菜刀，webrobot，burp等
+
+端口扫描：
+	常用工具
+		nmap：端口扫描之王
+		portscan
+		ntscan
+		telnet www.baidu.com 22(只能测一些固定常用的端口)
+			--->@@操作1：使用Rolan中ScanPort（设置ip 端口1-65535）	
+
+旁站C段：A站难搞，搞同意服务器上的其他站（同一网段的其他站）
+	c段：同一局域网内，做内网渗透
+	常用工具：
+		web>>K8旁站，御剑1.5
+		端口>>postscan
+		在线工具：www.5kik.com/c/    www.websan.cc/
+			--->@@操作1:“御剑”可查C段的
+			--->@@最强操作:百度查下“旁站C段”的一些在线工具
+			--->@@操作3：通过“嗅探”和“erp欺骗”可以搞到目标站
+整站分析：	
+
+	OS：Linux中文件区分大小写（Login.aspx）
+
+			--->@@操作:修改后后缀为大写Login.aspX,返回正常则是windows
+	网站容器：服务器
+			--->@@操作：burp抓包，看响应包中记录的信息
+
+	脚本格式：jsp php asp 
+			--->@@操作:看网站后缀  /随意输入路径看报错
+
+	数据库类型：不同的语言习惯性的使用不同的DB
+
+			--->@@操作1:"猜“ 根据脚本php +mysql的搭配来猜
+			--->@@操作2:扫描端口：比如mysql的3306，mssql：1433等
+
+	防护情况：简单的sql注入 可以套出安全狗waf
+	CMS类型：readme.txt
+
+			--->@@操作1:看是否有readme.txt看是否使用了CMS
+··			--->@@操作2:云溪资产查询资产
+
+	在线工具：https://scan.top15.cn/web/ (web指纹识别)
+
+谷歌hacker
+	1intext：管理员登陆  查找'网页中'含有该关键字的网站（可以通过一句话查找被插一句话的网站）
+	2intitle：后台登陆  查找标题是含有关键字的网站
+	3 inurl:asp?id=site:.hk    
+	谷歌hack：
+		@@总结：intext:网页内容中含有/
+			inurl:关键字(搜索含有关键字的 URL 地址)
+			site:域名(返回域名中所有的 URL 地址) 它可以探测网站的拓扑结构
+			intitle:关键字(标题中含有该关键字的网页)
+			filetype:文件名.后名(特定的文件类型)
+			info:关键字(搜索指定站点的一些基本信息)
+			stocks:搜索有关一家公司的股票市场信息
+			bphonebook:仅搜索商业电话号码簿
+			rphonebook:仅搜索住宅电话号码簿
+
+			--->@@操作: inurl:asp?id= site: .jp 拿到日本的asp站
+域名信息：
+
+URL 采集:
+
+后台查找：找后台
+
+			--->@@操作1: 通过谷歌语法联合查询
+			--->@@操作2:网站内部入口
+	短文件漏洞：a~！.jsp
+			--->@@操作1：http://113.57.227.3/jiaowu/Login.aspx--》http://113.57.227.3/jiaowu/L~!.aspx
+CDN绕过：
+	cdn:内容分发服务(每个地方都配置一个cdn服务器，用来缓存内容，给用户,真实ip难找)
+		如何判断是否有CDN：
+
+			--->@@操作1：用"爱站","speedTest"“站长工具”等用来测试响应时间的网站ping检测
+			--->@@操作2:我们拿到的ip并不是主服务器的ip二是CDN服务器的IP(百度ping检测，检测的都是
+				CDN服务器的ip)
+		绕过CDN：
+在有cdn的情况下如何获取真实ip
+			1查找2及域名
+			2服务器给你发包（邮件源文件）
+·、			3下载app抓包（下载文件）
+
+			--->@@操作1：查找二级域名（花钱给主域名架设CDN，二级域名和它在一个服务器上）
+			--->@@操作2：让服务器给我发一个包（注册时，发送邮件的的时候，“查看源文件”）
+			--->@@操作3：“历史解析IP” 在线网站 ip138 输入域名。可以找出之前的域名，可能是没做cdN之前的ip
+			--->@@操作4：下载app抓包（彩票,棋牌）
+			--->@@操作5：将域名和真实域名在C:\Windows\System32\drivers\etc\hosts中绑定下，访问时
+					就可以直接去真实ip了，不用经过dns查
+		   找到真实ip后，修改hosts文件（优先级高于DNS） 	
+		bgp:边际网关协议
+	
+	
+
+扫描工具：
+	awvs/nmap/sqlmap/metsta
+	--AWVS/Burpsuit
+				
+	手工挖：burpsuite
+
+nmap：端口扫描之王（测试主机：113.57.227.3）
+	主机探测:window下nmap.exe 192.168.1.2 
+		nmap 192.168.1.2 /192.168.1.1/24 （扫描单个主机/整个子网）
+		nmap 192.168.1.2 192.168.1.2 （多台主机）
+		nmap 192.168.1.1-100（ip范围内的所有主机）
+		nmap -iL target.txt(将ip存于target.txt)
+		nmap  -iL 192.168.1.1/24 (返回列表)
+		nmap 192.168.1.1/24-exclude 192.168.1.1
+			
+		抓鸡不如抓黑客，设置蜜罐，放33端口，	
+	端口扫描:
+		nmap -F -sT -v nmap.org
+		-F:100个最有可能开放的端口（）
+		 -v 获取扫描信息
+		 -sT 采用tcp扫描（本来默认的就是tcp）三次握手(非常稳定，但慢，会被防火墙日志记录)
+						1.client ------syn------>server
+						2.server---syn-ack------->client
+						3.client---ack------>server
+ 		-sS 采用syn扫描  未达成三次握手(没有建立tcp链接，扫描速度很快，不会被防火墙日志记录)
+						1.client ------syn------>server
+						2.server---syn-ack------->client
+						3.client---RST------>server
+			syn扫描器
+		-PU 使用UDP扫描:nmap -PU 192.168.1.1/24
+		-p需要指定端口 
+	状态：	 open：端口开启，数据到达主机，有程序在端口上监控
+	        	 closed ：端口关闭，数据没有到达主机，无服务在端口上监控
+		Filtered:数据没有到达主机，返回结果空，数据被防火墙IDS过滤
+		UnFiltered：数据有到达主机，但是不能识别端口的当前状态
+		open | filtered ：端口没有返回值，主要是udp，ip。fin，null和Xmas扫描中
+		Closed|filtered：只发生在IP ID idle扫描
+
+	服务版本扫描
+	主机系统指纹识别
+
+			 --->@@操作1：下载znmap工具
+
+密码破解：hydarw
+	
+
+
+防火墙躲避绕过
+	·		--->@@操作1：防火墙有时候会封锁ip。可以设置诱饵-D
+				nmap -D 1.1.1.1，222.222.222.222 域名	
+
+漏洞探测：awvs				
+AWVS 漏洞扫描（测试域名：113.57.227.3）
+	web scanner 中可以在 扫描中做手动测试避免误报
+	http Sniffer 可以拦截 http Fuzzer 可以通过爆破文件（pass.txt）修改参数
+			 --->@@操作1：新建扫描-->scan single website输入URL--->next---> next-->识别网站当前架构
+					-->next -->默认可以登会话-->next
+	 		--->@@操作2：查看结果和漏洞类型
+同时扫描多个站或者旁站时：
+	--->@@操作1：先搜索“旁站C段”，保存为以一个网页，放在服务器中，这些同服域名会被当做
+			友连，被扫描
+
+
+此时进不去后台咋办：
+	access数据库：直接下载数据库
+	sqlserver/mysql：可以找到db配置文件，远程连接
+	--->
+高级语法暴库：
+	inurl:/..admin../..add..
+	inurl:/..admin../..del..
+	inurl:/.asp <id=<%<%<%
+
+网站密码后台爆破：（可以爆破的都是弱口令）
+
+				--->@@操作1：逻辑秘钥： 'or'='or'  /   admin' or 1=1 --
+
+	爆破工具：burpsuite 不带验证码爆破/Discuz破解器 /python密码破解脚本/httpfuzzer(带验证码爆破)
+			有验证码时：
+
+				--->@@操作2：使用burp抓好验证码的包	，粘贴到PKAV fuzzer中，
+						粘贴访问地址到分析地址中
+				--->@@操作3：设置变体 并给变体加载字典
+				--->@@操作4：设置验证码图片地址，并测试识别准确度
+				--->@@操作5：设置重放选项修改（验证码固定长度，线程数，重试规则（服务器返回什么重新提交），伪造ip）
+	
+	EXP利用，找到该网站使用的某个CMS。之后才可以找到其对应的EXP			

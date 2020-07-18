@@ -1,0 +1,31 @@
+python用途
+	软件开发：
+		游戏后台，搜索，图形界面
+		网站
+		C/S软件
+		科学运算
+	系统管理
+		脚本
+		IT自动化工具
+
+python安装配置
+	安装包：python2.0（用于开发）
+	推荐ide：pychar wingIDE sublime text
+	python代码文件以py结尾 编译文件以pyc结尾
+	编译方法：
+		import py_compile
+		py_compile.compile("x.py")
+
+python 变量与运算符
+	变量赋值：
+		a =1
+		a=b=c=1
+		a,b,c=1,2,3
+	定义常量：使用大写
+	运算符：
+		&& 使用and
+		某个变量是否存在list中 使用  in   或者 not in
+		相同变量时只做变量地址的重定向
+	字符串转换：
+		str()
+		eval() 格式化字符串

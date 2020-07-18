@@ -1,0 +1,82 @@
+本章内容大纲：
+系统目录：
+	Windows/System32/config下：SAM系统密码存放文件(锁定文件-系统占用了)；常用场景：PE 清除密码
+	Windows/System32/drivers下：hosts文件：域名解析DNS(hosts优先级高于DNS)优先返回hosts记录ip ------>可以通过污染hosts进行钓鱼网站	
+	用户/用户信息		
+	
+服务：
+	1本机程序服务（安装服务后门）：可执行程序+参数
+	2网络服务
+		1web服务：
+		2DNS服务：解析域名
+		3DHCP服务：分发ip	
+		4邮件服务
+		5telnet服务：远程终端管理（windows明文传输）
+		6ssh服务：linux 机密传输
+		7ftp服务  明文传输上传下载
+		8smb服务
+端口：
+	端口就是来区分服务的ip:port     
+	总端口：1-65535
+	知名端口：0-1023（ftp:21,smtp:25,http:80,RPC:135）
+	动态端口：1024-65535（随取随用）
+	自身使用：>8000以上的高位端口
+	防火墙不能防止木马，但是可以通过某些特定的端口防止病毒（冰河：7626，WAy： ，Netspy3.0:7306,YAL:1024 等）
+	常见端口：（掌握到通过端口识别服务）
+		http协议代理服务器常用端口：80/8080/3128/8081/9080，ftp：21，telnet:23, TFTP69/udp 。
+		SSH(安全登录)/SCP(文件传输)/端口重定向：22/tcp。
+		SMTP：25/tcp（Email Password Sender/木马Antigen/haebu Coceda/Shtrilitz WinPc,WinSpy)。
+		POP3 :110/tcp,Tomcat:8080 ,win2003远程登录：3389，Oracle：1521，MS sql* server：1433/tcp 1433/udp。
+·		QQ:1080/udp
+	黑客通过端口可以干嘛？
+		信息收集，目标探测，服务判断，系统判断，系统角色分析
+
+		
+
+注册：windows核心数据库（）
+	HKEY_CLASSES_ROOT：管理文件系统
+	HKEY_CURRENT_USER：管理当前用户信息
+	HKEY_LOCAL_MACHINE：管理当前系统硬件配置
+		（修改SAM中用户的数据，登录后只会记录系统管理的的登录信息）
+			计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run  ：系统启动path
+	HKEY_USERS：系统用户信息
+	HKEY_CURRENT_CONFIG：当前用户的系统配置
+
+windows Dos命令：(常用的)
+	1拿到webshell 提权 可能操控dos 整体渗透测试，
+	 color：改变cmd颜色  
+	 ping ：域名 ---->ip 。
+	ipconfig /?    ipconfig / flashdns  清除dns ， ipconfig / release 释放Ip ， ipconfig / renew 重新获取ip
+	systeminfo 查看系统信息，arp -a  局域网地址通过Mac地址通信（根据IP地址获取物理地址的一个TCP/IP协议） ，net view 查看局域网内其他计算机名称
+	shutdown -s -t 180 -c "你别黑了，系统马上关机" ，dir：查看目录 ，cd：切换目录，start www.baidu.com,start 123.txt, copy con c:\123.txt ,
+	hello cracer ,ctrl+z 回车， md 目录：创建文件夹 ，rd 123 删除文件夹，ren 原文件名：新文件名  重名文件名
+	del 删除文件，copy 复制文件，move：移动文件，tree：树形列出文件夹结构，telnet ip：连接其他电脑，
+	hydra.exe - l adminstrator -P pass.txt 192.168.216.128 smb     -------局域网使用
+	net start 服务名
+	重要：
+	net user 查看所有用户
+	net user a a /add   创建一个用户名 a 密码 a的用户
+	net user a  查看a 的权限
+	net localgroup 查看分组
+	net user a  123   修改密码为123
+	net user guest /active：yes 启用该禁用的用户
+	net user guest /active：no 禁用该启用的用户
+	net localgroup adminstrators guest /add 添加用户到系统管理员权限
+	net localgroup adminstrators guest /del 删除该用户的系统管理员权限
+	net share c$ /del   :删除共享
+
+	netstat -an：查看连接协议端口
+	at 21：58 shutdown -s -t 180
+	tasklist 
+	taskkill /f /im qq.exe
+	msg a hello a  ：给a发送 hello a的弹窗
+
+	
+	
+	
+
+	
+
+	
+
+

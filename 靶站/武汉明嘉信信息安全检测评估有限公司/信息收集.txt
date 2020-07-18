@@ -1,0 +1,44 @@
+公司名称：武汉明嘉信信息安全检测评估有限公司
+
+域名：www.whmjx.net
+
+ip：47.114.37.161（无cdn）
+
+c段：47.114.37.1-47.114.37.255
+
+dns：
+	DNSDNS25.HICHINA.COM
+	DNS26.HICHINA.COM
+
+服务器厂商：阿里云主机 nginx代理服务器
+		Nginx，WordPress，jQuery，Font Awesome，PHP，Wordpress，MySQL，Yoast SEO，Server【nginx】
+
+服务器上只有该域名一个
+
+目前已知开发端口：80 ，443，22
+
+指纹：phpCMS-WordPress
+
+网站邮箱：hm@whmjx.net
+
+waf：存在WAF
+
+爬虫信息：User-agent: *
+	Disallow: /wp-admin/
+	Allow: /wp-admin/admin-ajax.php
+外链：
+	s.w.org
+	www.themepark.com.cn
+	wpa.qq.com
+	www.beian.miit.gov.cn
+	gmpg.org
+	www.beian.gov.cn
+	netdna.bootstrapcdn.com
+	mmbiz.qpic.cn
+	whmjx.net
+	github.com
+	docs.saltstack.com
+	0.gravatar.com
+	2.gravatar.com
+	1.gravatar.com
+

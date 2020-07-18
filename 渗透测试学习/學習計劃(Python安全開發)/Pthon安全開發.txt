@@ -1,0 +1,133 @@
+<table class="table table-responsive table-hover table-bordered ">
+						<tbody>
+							<tr class="text-center  bg-success">
+								<td width="12%">
+									教学阶段								</td>
+								<td width="14%">
+									教学内容								</td>
+								<td width="48%">
+									教学重点								</td>
+								<td width="26%">
+									教学目标								</td>
+							</tr>
+							<tr>
+								<td rowspan="9" style="vertical-align: middle;">
+									Python 基础知识								</td>
+								<td>基础知识</td>
+								<td class="text-left">
+									Python介绍与安装配置，基本语法，编码，标识符，行和缩进，注释，变量与运算符讲解</td>
+								<td rowspan="29" class="text-left">可掌握的核心知识点： <br>
+								  1、熟悉python开发语句； <br>
+								  2、掌握python开发语法<br>
+								  3、根据文档对功能模块进行编码； <br>
+								  4、根据测试环境开发工作中需要的临时工具<br>
+							    5、利用python完成自动化渗透测试</td>
+							</tr>
+							<tr>
+								<td>
+									数据类型</td>
+								<td class="text-left">Python数据类型，数字，字符串，列表，元组，字典<br>
+								  数据类型转换，字符串操作与运算<br>
+							    python日期和时间，格式化时间，time模块，日历模块</td>
+							</tr>
+							<tr>
+								<td>
+									流程控制</td>
+								<td class="text-left">逻辑运算符，条件判断语句（if  else elif）讲解，循环语句switch for range 等语句讲解<br>
+							    中断语句break，continue语句讲解</td>
+							</tr>
+							<tr>
+								<td>
+									函数应用</td>
+								<td class="text-left">
+									定义函数，声明函数，函数调用，参数，return，变量作用域</td>
+							</tr>
+							<tr>
+								<td>
+									模块用用</td>
+								<td class="text-left">
+									import，From…import 语句，定位模块，PATH变量，包，常用的内置函数</td>
+							</tr>
+							<tr>
+							  <td>正则表达式</td>
+							  <td class="text-left">正则表达式元字符，正则特性，字符匹配，matchobject实例，模块级函数，匹配多行，re.X匹配正则，分组</td>
+						  </tr>
+							<tr>
+								<td>
+									文件操作</td>
+								<td class="text-left">
+									文件打开和创建，读取，写入，内容查找和替换，文件内容遍历，文件删除，复制，重命名，目录操作</td>
+							</tr>
+							<tr>
+							  <td>常用模块库</td>
+							  <td class="text-left">urllib模块，request库，hackttp模块，多线程，socket通信，BeautifulSoup</td>
+						  </tr>
+							<tr>
+								<td>
+									类和对象</td>
+								<td class="text-left">
+									类的定义，对象创建，类的属性和方法，内部类，构造函数和析构函数，垃圾回收，类的继承，面向对象编程</td>
+							</tr>
+							<tr>
+								<td rowspan="20" style="vertical-align: middle;">Python 开发实战</td>
+								<td colspan="2"> 实战开发字典生成工具</td>
+							</tr>
+							<tr>
+								<td colspan="2"> 实战开发端口扫描工具</td>
+							</tr>
+							<tr>
+								<td colspan="2"> 实战开发WEB目录扫描工具</td>
+							</tr>
+							<tr>
+								<td colspan="2"> 实战开发子域名爆破工具</td>
+							</tr>
+							<tr>
+								<td colspan="2"> 实战开发数据库爆破工具</td>
+							</tr>
+							<tr>
+								<td colspan="2"> 实战开发Email爆破工具</td>
+							</tr>
+							<tr>
+								<td colspan="2"> 实战开发URL采集工具</td>
+							</tr>
+							<tr>
+							  <td colspan="2">实战开发phpmyadmin爆破工具</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发sqlmap tamper Bypass WAF</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发webshell生成工具</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发webshell免杀工具</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发上传漏洞exp编写</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发批量exp利用脚本</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发sql注入工具</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发多线程爬虫工具</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发代理ip采集脚本</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发配合代理ip多线程绕过waf扫描工具</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发 Bypass WAF 语句脚本</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发ARP欺骗攻击</td>
+						  </tr>
+							<tr>
+							  <td colspan="2">实战开发网络攻击测试工具</td>
+						  </tr>
+						</tbody>
+					</table>

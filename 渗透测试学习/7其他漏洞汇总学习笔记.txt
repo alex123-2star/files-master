@@ -1,0 +1,75 @@
+其他漏洞：现在好多站都没有什么漏洞，但衍生物却有
+php相关的漏洞
+JSP相关漏洞
+	struts2漏洞挖掘
+		单个目标站进行测试
+		工具爬行
+		找到漏洞地址例如：xx.action
+		用相关工具测试即可	K8，
+	Java反序列漏洞：将Java对象转为字节流，以便于保存在内存，文件，数据库中，反序列化则逆过程，将字节流转为对象
+		Java中ObjectOutputStream类的wiriteObeject()可实现序列化，ObjectInputStream 的readObject()可反序列化
+	获取tomcat登录和密码：-->密码攻击-Apache Tomcat	
+	进入tomcat后---》上传war包---》Webshell---》大马jsp中有一个bm1.war--》上传 进入bm1 密码520
+
+
+其他漏洞汇总
+	越权漏洞
+		水平越权：同等权限级别越权
+			挖掘方式：注册两个相同级别的账号a，b -->找到修改基本信息并修改信息-->burp抓包，修改用户名b为a
+			-->forward-->如果a账户信息被修改则存在水平越权，-->修改b为admin-->forward-->b被修改成admin则存在
+			纵向越权-->
+		纵向越权：不同等级别权限的越权
+		如何挖掘：漏洞点一般出现在数据交互，用户可以操作
+	逻辑漏洞
+	其他漏洞
+
+文件包含：文件引用时引用的文件，当文件中以变量的形式却选择文件时，则存在文件包含
+	include()：隐藏后门，绕过waf
+		产生条件：
+			1 include（）通过变量的形式引入需要包含的文件
+·			2用户可以控制变量
+		漏洞分类：
+			本地文件包含：可以包含本地文件，在条件允许时执行代码
+				1上传图片马，然后包含
+				2读敏感文件，读php文件
+					window:
+						boot.ini
+						MetaBase.xml
+						SAM
+						mysql/my.ini
+						php.ini
+						mysql.
+					linux:
+						authorized_keys
+						id_rsa
+						id_ras.keystore
+						known_hosts
+						passwd
+						shadow
+						my.conf
+					
+			案例：《？$test =$_GET('c') include($test)？》
+				<?=include($_GET(c))?>变量c可以是任意的，可以是服务器上任意文件 
+			利用技巧：
+				上传图片马：
+				<?fputs(fopen("shell.php","w")),"<?ph、 eva($_PST[x];)?>"?》
+				上传后图片路径为/uploadfile/x.jpg
+				访问http://www.xx.com/xx.php?page=uploadfile/x.jpg时
+				将会生成shell.php 内容为<?ph,eva($_PST[x];?)
+	
+			包含日志：
+				文件包含读取apache配置文件
+				index.php?page=/etc
+				将一句话写入到access_log中	通过包含执行shell
+
+			
+		漏洞挖掘：
+			白盒代码审计：搜寻include()/required()函数
+			黑盒工具挖掘：awvs，appscan，burp,w3af
+			
+		
+				
+	required():找不到则停止脚本允许
+
+
+	

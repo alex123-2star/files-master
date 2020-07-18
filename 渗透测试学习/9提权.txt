@@ -1,0 +1,47 @@
+提权：已经拿到webshell之后，但是只能修改这个网站，这是不够的，提升服务器权限
+
+windows提权：
+
+	--->@@操作：rolan中webshell中的”大马专用来提权 “使用，上传至服务器 并访问大马后台-->执行cmd命令
+		--》若拒绝访问--》在权限中找到一个可读可写的目录，并在该目录上传一个rolan/权限提升cmd.exe-->
+		执行cmd --》ipconfig
+		这种权限只能使用命令查询但是不能创建用户net user 此时继续上传aspx的大马获取管理员权限
+
+	当系统很安全时，其他安装在该系统其他软件是否可以提权（比如ftp 的sever u服务器）
+	--->@@操作：
+Linux提权：
+
+通常脚本所处的权限：
+	ASP/php：匿名权限，权限非常小
+	APSx : User权限 （大）
+	jsp : 通常时系统权限（非常大）
+
+提权信息收集：
+	内外网 ：
+		--->@@操作:ipconfig看ip (了解时服务器在外网裸跑还是内网端口转发)
+	服务器系统和版本的位数 ：
+		--->@@操作
+	服务器补丁情况 ：
+	服务器安全软件情况 ：
+	服务器防护软件情况 ：
+	端口情况 ：
+	支持脚本情况 ：
+windows常见命令：
+		--->@@操作下列命令：
+	ipconfig /all 查看当前IP	
+	net user 查看当前服务器账号情况
+	netstat -ano 查看当前服务器端口开放情况
+	ver 查看服务器当前操作系统
+	systeminfo查看当前服务器配置信息（补丁情况）
+	tasklist /svc 查看当前服务器进程情况
+	taskkill -PID 结束某个pid号的进程
+	taskkill /im qq.exe /f  杀死qq进程
+	net user username pass /add  新增一个用户
+	net localgroup administrator userName /add  将某某用户添加到管理员组
+	whoami 当前操作用户
+	
+Linux常见命令：
+		--->@@操作下列命令：
+	ls -al 查看当前目录下的文件和文件夹
+	pwd 查看当前操作路径
+	uname -a 查看当前服务器内核信息

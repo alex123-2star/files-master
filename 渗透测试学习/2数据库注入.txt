@@ -1,0 +1,31 @@
+网站暴库漏洞：目录遍历漏洞---->site:qq.com 转到父目录
+	大多数以access数据库，以文件形式存放在服务器，下载该文件
+		http：//192.168.0.1/xydata/q12.asp::$data--------------->获取数据库路径
+		http：//192.168.0.1/xydata/xycms.mdb::$data--------------->获取数据库路径
+		#adsf.mdb
+	sqlserver，mysql 可以下载连接地址 去连接
+
+	intext: <%eval  
+
+下载漏洞：可以通过下载链接下载数据库配置文件
+	有下载链的（inurl ：链接中含有 ，site：站点中包含该域名的所有站点中存在）
+	inurl:down.asp?filename= site:sddx.cn     :  看该网站下是否有这样的下载链
+
+网站后台密码爆破：弱口令（弱口令集合）
+		逻辑万能密钥：'or'='or'  ;    php---->admin' or '1 ='1  // admin' #
+		
+破解工具；
+	burpsuite：一般跑没有验证码的
+	Pkav http Fuzzer ：可以用bp抓好的包----->请求包 修改请求包中 添加标记
+			admin=admin&password=$123$&verifycode=$yzm$
+			添加验证码地址
+	Discuz破解器
+	python密码破解脚本
+	httpfuzzer
+	针对性的破解工具
+ EXP 利用：Powered by AspCms2.0   AspCms 漏洞
+	主流网站 基本上都有漏洞和exp 如 织梦，ohocms，strus2，phpweb
+	可以百度收集
+	可以和朋友交流探讨
+	可以利用工具直接exp
+

